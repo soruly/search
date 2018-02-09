@@ -7,7 +7,7 @@ require 'vendor/autoload.php';
 
 $client = ClientBuilder::create()->setHosts(['192.168.2.12'])->build();
 
-$response = $client->indices()->delete(['index' => 'files']);
+//$response = $client->indices()->delete(['index' => 'files']);
 
 $params = [
 	'index' => 'files',
