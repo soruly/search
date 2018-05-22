@@ -1,0 +1,26 @@
+version: "3"
+services:
+  elasticsearch:
+    image: blacktop/elasticsearch:latest
+    networks:
+      - app_net
+    ports:
+      - "9200:9200"
+  web:
+    image: nginx:stable-alpine
+    networks:
+      - app_net
+    ports:
+      - "80:80"
+    volumes:
+      - .:/app
+      - ./nginx.conf:/etc/nginx/nginx.conf
+  phpfpm:
+    image: php:7.2-fpm-alpine3.7
+    networks:
+      - app_net
+    volumes:
+      - .:/app
+      - ${FILE_LIST}:/app/list.txt:ro
+networks:
+  app_net:

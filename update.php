@@ -5,9 +5,12 @@ use Elasticsearch\ClientBuilder;
 
 require 'vendor/autoload.php';
 
-$client = ClientBuilder::create()->setHosts(['192.168.2.12'])->build();
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
 
-$index = explode(".", gethostname())[0];
+$client = ClientBuilder::create()->setHosts([$_ENV["ELASTICSEARCH_HOST"]])->build();
+
+$index = "files";
 
 if ($client->indices()->exists(['index' => $index])) {
   $client->indices()->delete(['index' => $index]);
@@ -25,7 +28,7 @@ $params = [
 
 $response = $client->indices()->create($params);
 
-$file="./list.txt";
+$file=$_ENV["FILE_LIST"];
 
 $params = [];
 $linecount = 0;

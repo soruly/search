@@ -33,8 +33,11 @@ use Elasticsearch\ClientBuilder;
 
 require 'vendor/autoload.php';
 
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+
 $curl = curl_init();
-curl_setopt($curl, CURLOPT_URL, "http://192.168.2.12:9200/_stats");
+curl_setopt($curl, CURLOPT_URL, "http://".$_ENV["ELASTICSEARCH_HOST"].":9200/_stats");
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 $res = curl_exec($curl);
 $result = json_decode($res);
@@ -47,10 +50,10 @@ if(isset($_GET['q'])){
 
   $params = array();
   $params['hosts'] = array (
-    '192.168.2.12'
+    $_ENV["ELASTICSEARCH_HOST"]
   );
 
-  $client = ClientBuilder::create()->setHosts(['192.168.2.12'])->build();
+  $client = ClientBuilder::create()->setHosts([$_ENV["ELASTICSEARCH_HOST"]])->build();
   $from = isset($_GET['from']) ? intval($_GET['from']) : 0;
   $size = isset($_GET['size']) ? intval($_GET['size']) : 100;
   if($from < 0) $from = 0;
@@ -87,7 +90,7 @@ if(isset($_GET['q'])){
 }
 }
 }';
-$params['index'] = ['snowy', 'shuvi'];
+$params['index'] = ['files'];
 $params['type']  = 'file';
 if($_GET['q'] != '')
   $params['body'] = $json;
