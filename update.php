@@ -28,7 +28,7 @@ $params = [
 
 $response = $client->indices()->create($params);
 
-$file=$_ENV["FILE_LIST"];
+$file="./list.txt";
 
 $params = [];
 $linecount = 0;

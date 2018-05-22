@@ -5,13 +5,15 @@ services:
     networks:
       - app_net
     ports:
-      - "9200:9200"
+      - "9201:9200"
+    restart: always
   web:
     image: nginx:stable-alpine
     networks:
       - app_net
     ports:
-      - "80:80"
+      - "8001:80"
+    restart: always
     volumes:
       - .:/app
       - ./nginx.conf:/etc/nginx/nginx.conf
@@ -19,6 +21,7 @@ services:
     image: php:7.2-fpm-alpine3.7
     networks:
       - app_net
+    restart: always
     volumes:
       - .:/app
       - ${FILE_LIST}:/app/list.txt:ro
