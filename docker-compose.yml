@@ -24,6 +24,7 @@ services:
     restart: always
     volumes:
       - .:/app
+      - ./php.ini:/usr/local/etc/php/conf.d/php.ini
       - ${FILE_LIST}:/app/list.txt:ro
 networks:
   app_net:
