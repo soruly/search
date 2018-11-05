@@ -1,7 +1,7 @@
 version: "3"
 services:
   elasticsearch:
-    image: blacktop/elasticsearch:latest
+    image: elasticsearch:5-alpine
     networks:
       - app_net
     ports:
@@ -18,7 +18,7 @@ services:
       - .:/app
       - ./nginx.conf:/etc/nginx/nginx.conf
   phpfpm:
-    image: php:7.2-fpm-alpine3.7
+    image: php:fpm-alpine
     networks:
       - app_net
     restart: always
