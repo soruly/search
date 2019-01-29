@@ -68,6 +68,8 @@ app.get("/update", async (req, res) => {
   res.end();
 });
 
+app.use(express.static("public"));
+
 app.get("/", async (req, res) => {
   const from = parseInt(req.query.from, 10) || 0;
   const size = 50;
