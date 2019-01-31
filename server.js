@@ -97,12 +97,7 @@ app.get("/", async (req, res) => {
     headers: {"Content-Type": "application/json"}
   }).then((response) => response.json());
 
-  const docsCount = await fetch(`http://${ELASTICSEARCH_HOST}:9200/_stats`)
-    .then((response) => response.json())
-    .then((result) => result._all.primaries.docs.count);
-
   res.render("index", {
-    docsCount,
     q: req.query.q,
     results,
     prev: `?q=${req.query.q}&from=${from - size < 0 ? 0 : from - size}`,
