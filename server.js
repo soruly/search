@@ -73,7 +73,7 @@ app.use(express.static("public"));
 app.get("/", async (req, res) => {
   const from = parseInt(req.query.from, 10) || 0;
   const size = 50;
-  const json = {
+  const json = req.query.q ? {
     from,
     size,
     query: {
@@ -81,14 +81,15 @@ app.get("/", async (req, res) => {
         must: {
           match: {
             filename: {
-              query: req.query.q || "",
+              query: req.query.q,
               operator: "or"
             }
           }
         }
       }
     }
-  };
+  } : {from,
+    size};
 
   const results = await fetch(`http://${ELASTICSEARCH_HOST}:9200/files/file/_search`, {
     method: "POST",
