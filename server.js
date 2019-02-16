@@ -100,8 +100,8 @@ app.get("/", async (req, res) => {
   res.render("index", {
     q: req.query.q,
     results,
-    prev: `?q=${req.query.q}&from=${from - size < 0 ? 0 : from - size}`,
-    next: `?q=${req.query.q}&from=${from + size}`
+    prev: `?q=${req.query.q || ""}&from=${from - size < 0 ? 0 : from - size}`,
+    next: `?q=${req.query.q || ""}&from=${from + size}`
   });
 });
 
