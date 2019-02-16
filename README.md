@@ -22,21 +22,21 @@ npm install
 ### 2. Configure settings in .env
 Copy .env.example and rename to .env
 ```
-ELASTICSEARCH_HOST=elasticsearch   # docker internal hostname, no need to change
-ELASTICSEARCH_PORT=9201            # you can access elasticsearch from host
-NODE_PORT=8001                     # web interface would listen to this port
-FILE_LIST=/mnt/store/list.txt      # a huge text file to index
+ES_JAVA_OPTS=-Xms512m -Xmx512m   # elasticsearch java options, ram usage config
+ELASTICSEARCH_PORT=9201          # you can access elasticsearch from host, for debug use
+NODE_PORT=8001                   # web interface would listen to this port
+FILE_LIST=/tmp/list.txt          # a huge text file to index
 ```
 
-### 3. Run docker
-```bash
-docker-compose up -d
-```
-
-### 4. Prepare your huge text file
+### 3. Prepare your huge text file
 For example, generate a filename list
 ```bash
-find /mnt/store/ > /mnt/store/list.txt
+find . > /tmp/list.txt
+```
+
+### 4. Run docker
+```bash
+docker-compose up -d
 ```
 
 ### 5. Index the file
@@ -52,5 +52,5 @@ Note: existing index would be wiped everytime on update
 ## Scheduling update
 You can schedule a cron job to periodically update the index
 ```
-0 * * * * find /mnt/store/ > /mnt/store/list.txt && curl http://127.0.0.1:8001/update
+0 * * * * find . > /tmp/list.txt && curl http://127.0.0.1:8001/update
 ```
