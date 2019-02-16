@@ -12,14 +12,16 @@ html(lang='en')
     input(type='submit')
   small About #{results.hits.total} results (#{results.took} miliseconds)
   br
-  div
-    a(href= prev) Prev
-  div(style='text-align:right')
-    a(href= next) Next
+  div.nav
+    div
+      a(href= prev) Prev
+    div
+      a(href= next) Next
   each val in results.hits.hits
     = val._source.filename
     br
-  div
-    a(href= prev) Prev
-  div(style='text-align:right')
-    a(href= next) Next
+  div.nav
+    div
+      a(href= prev) Prev
+    div
+      a(href= next) Next
