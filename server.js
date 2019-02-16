@@ -7,7 +7,7 @@ const port = 3000;
 
 const {ELASTICSEARCH_HOST} = process.env;
 
-app.set("view engine", "hbs");
+app.set("view engine", "pug");
 app.get("/update", async (req, res) => {
   const startTime = Date.now();
   res.writeHead(200, {

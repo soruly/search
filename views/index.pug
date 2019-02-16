@@ -1,0 +1,25 @@
+doctype html
+html(lang='en')
+  head
+  meta(http-equiv='Content-Type' content='text/html; charset=UTF-8') 
+  link(rel='shortcut icon' type='image/jpeg' href='data:,')
+  title search
+  style
+    include style.css
+  body
+  form(action='/' method='get')
+    input(type='text' name='q' autofocus value= q)
+    input(type='submit')
+  small About #{results.hits.total} results (#{results.took} miliseconds)
+  br
+  div
+    a(href= prev) Prev
+  div(style='text-align:right')
+    a(href= next) Next
+  each val in results.hits.hits
+    = val._source.filename
+    br
+  div
+    a(href= prev) Prev
+  div(style='text-align:right')
+    a(href= next) Next
