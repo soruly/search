@@ -19,7 +19,7 @@
   "dependencies": {
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
-    "fs-extra": "^7.0.1",
+    "fs-extra": "^8.0.1",
     "node-fetch": "^2.3.0",
     "pug": "^2.0.3"
   },
