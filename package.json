@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "eslint ."
+    "format": "prettier --write \"**/*.js\"",
+    "lint": "prettier --check \"**/*.js\"",
+    "test": "prettier --check \"**/*.js\""
   },
   "repository": {
     "type": "git",
