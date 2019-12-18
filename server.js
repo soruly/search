@@ -1,12 +1,13 @@
 require("dotenv").config();
 const express = require("express");
 const fetch = require("node-fetch");
-const fs = require("fs-extra");
+const bodyParser = require("body-parser");
 const app = express();
 const port = 3000;
 
 app.set("view engine", "pug");
-app.get("/update", async (req, res) => {
+app.use(bodyParser.text({ type: "text/plain", limit: 1024 * 1024 * 1024 }));
+app.post("/update", async (req, res) => {
   const startTime = Date.now();
   res.writeHead(200, {
     "Content-Type": "text/plain",
@@ -33,8 +34,7 @@ app.get("/update", async (req, res) => {
   }).then(response => response.json());
   res.write(`${JSON.stringify(result)}\n`);
   res.write("Reading filelist...\n");
-  const data = await fs.readFile("list.txt", "utf-8");
-  const fileList = data.split("\n");
+  const fileList = req.body.split("\n");
 
   res.write("Indexing...\n");
   const asyncTask = async function*() {

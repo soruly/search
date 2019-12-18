@@ -22,7 +22,6 @@ services:
     working_dir: /home/node/app
     volumes:
       - ./:/home/node/app
-      - ${FILE_LIST}:/home/node/app/list.txt:ro
     command: "npm start"
 networks:
   app_net:
