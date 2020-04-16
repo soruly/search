@@ -1,13 +1,30 @@
 require("dotenv").config();
-const express = require("express");
 const fetch = require("node-fetch");
-const bodyParser = require("body-parser");
-const app = express();
-const port = 3000;
+const Koa = require("koa");
+const render = require("koa-ejs");
+const bodyParser = require("koa-bodyparser");
+const app = new Koa();
 
-app.set("view engine", "pug");
-app.use(bodyParser.text({ type: "text/plain", limit: 1024 * 1024 * 1024 }));
-app.post("/update", async (req, res) => {
+render(app, {
+  root: __dirname,
+  layout: false,
+  viewExt: "ejs",
+  cache: true,
+  debug: false,
+});
+
+app.use(
+  bodyParser({
+    enableTypes: ["text"],
+    textLimit: 1024 * 1024 * 1024,
+  })
+);
+
+app.use(async ({ request, res, path }, next) => {
+  if (path !== "/update") {
+    await next();
+    return;
+  }
   const startTime = Date.now();
   res.writeHead(200, {
     "Content-Type": "text/plain",
@@ -34,7 +51,7 @@ app.post("/update", async (req, res) => {
   }).then((response) => response.json());
   res.write(`${JSON.stringify(result)}\n`);
   res.write("Reading filelist...\n");
-  const fileList = req.body.split("\n");
+  const fileList = request.body.split("\n");
 
   res.write("Indexing...\n");
   const asyncTask = async function* () {
@@ -70,10 +87,10 @@ app.post("/update", async (req, res) => {
   res.end();
 });
 
-app.get("/", async (req, res) => {
-  const from = parseInt(req.query.from, 10) || 0;
+app.use(async (ctx, next) => {
+  const from = parseInt(ctx.query.from, 10) || 0;
   const size = 50;
-  const json = req.query.q
+  const json = ctx.query.q
     ? {
         from,
         size,
@@ -82,7 +99,7 @@ app.get("/", async (req, res) => {
             must: {
               match: {
                 filename: {
-                  query: req.query.q,
+                  query: ctx.query.q,
                   operator: "or",
                 },
               },
@@ -98,12 +115,12 @@ app.get("/", async (req, res) => {
     headers: { "Content-Type": "application/json" },
   }).then((response) => response.json());
 
-  res.render("index", {
-    q: req.query.q,
+  await ctx.render("index", {
+    q: ctx.query.q,
     results,
-    prev: `?q=${req.query.q || ""}&from=${from - size < 0 ? 0 : from - size}`,
-    next: `?q=${req.query.q || ""}&from=${from + size}`,
+    prev: `?q=${ctx.query.q || ""}&from=${from - size < 0 ? 0 : from - size}`,
+    next: `?q=${ctx.query.q || ""}&from=${from + size}`,
   });
 });
 
-app.listen(port);
+app.listen(3000);

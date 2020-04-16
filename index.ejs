@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="shortcut icon" type="image/jpeg" href="data:," />
+  <title>search</title>
+  <style>
+    <% include style.css %>
+  </style>
+  <form action="/" method="get">
+    <input type="text" name="q" autofocus value="<%= q %>" />
+    <input type="submit" />
+  </form>
+  <small>About <%= results.hits.total %> results (<%= results.took %> miliseconds)</small>
+  <br>
+  <div class="nav">
+    <div><a href="<%= prev %>">Prev</a></div>
+    <div><a href="<%= next %>">Next</a></div>
+  </div>
+  <% results.hits.hits.forEach(function (result) {%>
+    <%= result._source.filename %><br>
+  <% })%>
+  <div class="nav">
+    <div><a href="<%= prev %>">Prev</a></div>
+    <div><a href="<%= next %>">Next</a></div>
+  </div>
+</html>
