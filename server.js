@@ -33,12 +33,9 @@ app.use(async ({ request, res, path }, next) => {
     "Transfer-Encoding": "chunked",
   });
   res.write("Remove existing index...\n");
-  const resultDelete = await fetch(
-    `http://127.0.0.1:${ELASTICSEARCH_PORT}/files`,
-    {
-      method: "DELETE",
-    }
-  ).then((response) => response.json());
+  const resultDelete = await fetch(`http://127.0.0.1:${ELASTICSEARCH_PORT}/files`, {
+    method: "DELETE",
+  }).then((response) => response.json());
   res.write(`${JSON.stringify(resultDelete)}\n`);
 
   res.write("Creating new index...\n");
@@ -85,9 +82,9 @@ app.use(async ({ request, res, path }, next) => {
     res.write(`${end}\n`);
   }
   res.write(
-    `Index update took ${((Date.now() - startTime) / 1000).toFixed(
-      2
-    )} seconds for ${fileList.length} records\n`
+    `Index update took ${((Date.now() - startTime) / 1000).toFixed(2)} seconds for ${
+      fileList.length
+    } records\n`
   );
   res.end();
 });
@@ -114,14 +111,11 @@ app.use(async (ctx, next) => {
       }
     : { from, size };
 
-  const results = await fetch(
-    `http://127.0.0.1:${ELASTICSEARCH_PORT}/files/file/_search`,
-    {
-      method: "POST",
-      body: JSON.stringify(json),
-      headers: { "Content-Type": "application/json" },
-    }
-  ).then((response) => response.json());
+  const results = await fetch(`http://127.0.0.1:${ELASTICSEARCH_PORT}/files/file/_search`, {
+    method: "POST",
+    body: JSON.stringify(json),
+    headers: { "Content-Type": "application/json" },
+  }).then((response) => response.json());
 
   await ctx.render("index", {
     q: ctx.query.q,

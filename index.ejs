@@ -11,13 +11,12 @@
     <input type="submit" />
   </form>
   <small>About <%= results.hits.total %> results (<%= results.took %> miliseconds)</small>
-  <br>
+  <br />
   <div class="nav">
     <div><a href="<%= prev %>">Prev</a></div>
     <div><a href="<%= next %>">Next</a></div>
   </div>
-  <% results.hits.hits.forEach(function (result) {%>
-    <%= result._source.filename %><br>
+  <% results.hits.hits.forEach(function (result) {%> <%= result._source.filename %><br />
   <% })%>
   <div class="nav">
     <div><a href="<%= prev %>">Prev</a></div>

@@ -38,7 +38,7 @@ NODE_PORT=8001                   # web interface would listen to this port
 For example, generate a filename list
 
 ```bash
-find . > /tmp/list.txt
+find . > list.txt
 ```
 
 ### 4. Run docker
@@ -50,7 +50,7 @@ docker run -d --name=search -p 9201:9200 --restart always -e "ES_JAVA_OPTS=-Xms5
 ### 5. Index the file
 
 ```bash
-curl -X POST -H "Content-Type: text/plain" --data-binary @/tmp/list.txt  http://127.0.0.1:8001/update
+curl -X POST -H "Content-Type: text/plain" --data-binary @list.txt http://127.0.0.1:8001/update
 ```
 
 Index update usually takes 90 seconds for 2 million records
@@ -70,5 +70,5 @@ Note: existing index would be wiped everytime on update
 You can schedule a cron job to periodically update the index
 
 ```
-0 * * * * find . > /tmp/list.txt && curl -X POST -H "Content-Type: text/plain" --data-binary @/tmp/list.txt  http://127.0.0.1:8001/update
+0 * * * * find . > list.txt && curl -X POST -H "Content-Type: text/plain" --data-binary @list.txt http://127.0.0.1:8001/update
 ```
