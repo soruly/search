@@ -1,0 +1,12 @@
+module.exports = {
+  apps: [
+    {
+      name: "search-www",
+      script: "server.js",
+      instances: 1,
+      autorestart: true,
+      watch: false,
+      exec_mode: "fork",
+    },
+  ],
+};

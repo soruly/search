@@ -5,6 +5,8 @@ const render = require("koa-ejs");
 const bodyParser = require("koa-bodyparser");
 const app = new Koa();
 
+const { ELASTICSEARCH_PORT, NODE_PORT } = process.env;
+
 render(app, {
   root: __dirname,
   layout: false,
@@ -31,13 +33,16 @@ app.use(async ({ request, res, path }, next) => {
     "Transfer-Encoding": "chunked",
   });
   res.write("Remove existing index...\n");
-  const resultDelete = await fetch("http://elasticsearch:9200/files", {
-    method: "DELETE",
-  }).then((response) => response.json());
+  const resultDelete = await fetch(
+    `http://127.0.0.1:${ELASTICSEARCH_PORT}/files`,
+    {
+      method: "DELETE",
+    }
+  ).then((response) => response.json());
   res.write(`${JSON.stringify(resultDelete)}\n`);
 
   res.write("Creating new index...\n");
-  const result = await fetch("http://elasticsearch:9200/files", {
+  const result = await fetch(`http://127.0.0.1:${ELASTICSEARCH_PORT}/files`, {
     method: "PUT",
     body: JSON.stringify({
       settings: {
@@ -67,7 +72,7 @@ app.use(async ({ request, res, path }, next) => {
         command.push({ filename: fileList[start + i] });
       }
       const body = `${command.map((obj) => JSON.stringify(obj)).join("\n")}\n`;
-      await fetch("http://elasticsearch:9200/files/file/_bulk", {
+      await fetch(`http://127.0.0.1:${ELASTICSEARCH_PORT}/files/file/_bulk`, {
         method: "POST",
         body,
         headers: { "Content-Type": "application/x-ndjson" },
@@ -109,11 +114,14 @@ app.use(async (ctx, next) => {
       }
     : { from, size };
 
-  const results = await fetch("http://elasticsearch:9200/files/file/_search", {
-    method: "POST",
-    body: JSON.stringify(json),
-    headers: { "Content-Type": "application/json" },
-  }).then((response) => response.json());
+  const results = await fetch(
+    `http://127.0.0.1:${ELASTICSEARCH_PORT}/files/file/_search`,
+    {
+      method: "POST",
+      body: JSON.stringify(json),
+      headers: { "Content-Type": "application/json" },
+    }
+  ).then((response) => response.json());
 
   await ctx.render("index", {
     q: ctx.query.q,
@@ -123,4 +131,4 @@ app.use(async (ctx, next) => {
   });
 });
 
-app.listen(3000);
+app.listen(NODE_PORT);

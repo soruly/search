@@ -29,7 +29,6 @@ npm install
 Copy .env.example and rename to .env
 
 ```
-ES_JAVA_OPTS=-Xms512m -Xmx512m   # elasticsearch java options, ram usage config
 ELASTICSEARCH_PORT=9201          # you can access elasticsearch from host, for debug use
 NODE_PORT=8001                   # web interface would listen to this port
 ```
@@ -45,7 +44,7 @@ find . > /tmp/list.txt
 ### 4. Run docker
 
 ```bash
-docker-compose up -d
+docker run -d --name=search -p 9201:9200 --restart always -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" elasticsearch:5-alpine
 ```
 
 ### 5. Index the file
@@ -55,6 +54,12 @@ curl -X POST -H "Content-Type: text/plain" --data-binary @/tmp/list.txt  http://
 ```
 
 Index update usually takes 90 seconds for 2 million records
+
+### 6. Start web server
+
+```
+node server.js
+```
 
 Now open the webpage http://127.0.0.1:8001
 
