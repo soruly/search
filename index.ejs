@@ -4,7 +4,7 @@
   <link rel="shortcut icon" type="image/jpeg" href="data:," />
   <title>search</title>
   <style>
-    <% include style.css %>
+    <%- include('style.css'); -%>
   </style>
   <form action="/" method="get">
     <input type="text" name="q" autofocus value="<%= q %>" />

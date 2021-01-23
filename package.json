@@ -1,6 +1,6 @@
 {
   "name": "search",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,7 @@
     "restart": "pm2 restart ecosystem.config.js",
     "reload": "pm2 reload ecosystem.config.js",
     "delete": "pm2 delete ecosystem.config.js",
+    "jest": "jest",
     "prettier": "prettier",
     "format": "prettier --write \"**/*.js\"",
     "lint": "prettier --check \"**/*.js\"",
@@ -25,13 +26,15 @@
   },
   "homepage": "https://github.com/soruly/search#readme",
   "dependencies": {
-    "dotenv": "^8.1.0",
-    "koa": "^2.13.1",
-    "koa-bodyparser": "^4.3.0",
-    "koa-ejs": "^4.3.0",
-    "node-fetch": "^2.3.0"
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "fastify": "^3.0.0",
+    "fastify-autoload": "^3.3.1",
+    "node-fetch": "^2.6.1",
+    "point-of-view": "^4.8.0"
   },
   "devDependencies": {
+    "jest": "^26.6.3",
     "prettier": "^2.2.1"
   }
 }
