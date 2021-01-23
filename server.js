@@ -7,7 +7,7 @@ const fastify = require("fastify")({
 
 fastify
   .register(require("./app.js"))
-  .listen(process.env.NODE_PORT, "127.0.0.1")
+  .listen(process.env.PORT, process.env.LISTEN)
   .then((address) => console.log(`server listening on ${address}`))
   .catch((err) => {
     console.log("Error starting server:", err);

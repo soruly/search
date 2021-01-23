@@ -7,13 +7,13 @@ module.exports = async function (fastify, opts) {
       "Transfer-Encoding": "chunked",
     });
     reply.raw.write("Remove existing index...\n");
-    const resultDelete = await fetch(`http://127.0.0.1:${process.env.ELASTICSEARCH_PORT}/files`, {
+    const resultDelete = await fetch(`${process.env.ELASTICSEARCH_ENDPOINT}/files`, {
       method: "DELETE",
     }).then((response) => response.json());
     reply.raw.write(`${JSON.stringify(resultDelete)}\n`);
 
     reply.raw.write("Creating new index...\n");
-    const result = await fetch(`http://127.0.0.1:${process.env.ELASTICSEARCH_PORT}/files`, {
+    const result = await fetch(`${process.env.ELASTICSEARCH_ENDPOINT}/files`, {
       method: "PUT",
       body: JSON.stringify({
         settings: {
@@ -43,7 +43,7 @@ module.exports = async function (fastify, opts) {
           command.push({ filename: fileList[start + i] });
         }
         const body = `${command.map((obj) => JSON.stringify(obj)).join("\n")}\n`;
-        await fetch(`http://127.0.0.1:${process.env.ELASTICSEARCH_PORT}/files/file/_bulk`, {
+        await fetch(`${process.env.ELASTICSEARCH_ENDPOINT}/files/file/_bulk`, {
           method: "POST",
           body,
           headers: { "Content-Type": "application/x-ndjson" },
