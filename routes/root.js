@@ -32,7 +32,15 @@ module.exports = async function (fastify, opts) {
     ).then((response) => response.json());
     return reply.view("index.ejs", {
       q: request.query.q,
-      results,
+      results: results.error
+        ? {
+            took: 0,
+            hits: {
+              total: 0,
+              hits: [],
+            },
+          }
+        : results,
       prev: `?q=${request.query.q || ""}&from=${from - size < 0 ? 0 : from - size}`,
       next: `?q=${request.query.q || ""}&from=${from + size}`,
     });
