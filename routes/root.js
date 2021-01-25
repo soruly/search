@@ -1,5 +1,6 @@
-module.exports = async function (fastify, opts) {
-  const fetch = require("node-fetch");
+import fetch from "node-fetch";
+
+export default async function (fastify, opts) {
   fastify.get("/", async function (request, reply) {
     const from = parseInt(request.query.from, 10) || 0;
     const size = 50;
@@ -42,4 +43,4 @@ module.exports = async function (fastify, opts) {
       next: `?q=${request.query.q || ""}&from=${from + size}`,
     });
   });
-};
+}

@@ -1,5 +1,6 @@
-module.exports = async function (fastify, opts) {
-  const fetch = require("node-fetch");
+import fetch from "node-fetch";
+
+export default async function (fastify, opts) {
   fastify.post("/update", async function (request, reply) {
     const startTime = Date.now();
     reply.raw.writeHead(200, {
@@ -62,4 +63,4 @@ module.exports = async function (fastify, opts) {
     );
     reply.raw.end();
   });
-};
+}

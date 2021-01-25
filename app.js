@@ -1,10 +1,14 @@
-const path = require("path");
-const AutoLoad = require("fastify-autoload");
+import dotenv from "dotenv";
+dotenv.config({ silent: true });
 
-module.exports = async function (fastify, opts) {
-  fastify.register(require("point-of-view"), {
+import AutoLoad from "fastify-autoload";
+import * as PointOfView from "point-of-view";
+import * as EJS from "ejs";
+
+export default async function (fastify, opts) {
+  fastify.register(PointOfView, {
     engine: {
-      ejs: require("ejs"),
+      ejs: EJS,
     },
   });
 
@@ -14,14 +18,14 @@ module.exports = async function (fastify, opts) {
   // those should be support plugins that are reused
   // through your application
   // fastify.register(AutoLoad, {
-  //   dir: path.join(__dirname, "plugins"),
+  //   dir: "plugins",
   //   options: Object.assign({}, opts),
   // });
 
   // This loads all plugins defined in routes
   // define your routes in one of these
   fastify.register(AutoLoad, {
-    dir: path.join(__dirname, "routes"),
+    dir: "routes",
     options: Object.assign({}, opts),
   });
-};
+}

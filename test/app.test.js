@@ -1,16 +1,17 @@
-require("dotenv").config();
+import fs from "fs";
+import { StringDecoder } from "string_decoder";
+import fetch from "node-fetch";
+import Fastify from "fastify";
+import App from "../app.js";
 
-const fs = require("fs");
-const { StringDecoder } = require("string_decoder");
-const fetch = require("node-fetch");
-const fastify = require("fastify")({
+const fastify = Fastify({
   logger: false,
   bodyLimit: 1024 * 1024 * 1024,
 });
 
 const PORT = 30000;
 
-beforeAll(() => fastify.register(require("../app.js")).listen(PORT));
+beforeAll(() => fastify.register(App).listen(PORT));
 
 afterAll(() => fastify.close());
 
