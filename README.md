@@ -1,8 +1,8 @@
 # search
 
-[![Build Status](https://travis-ci.org/soruly/search.svg?branch=master)](https://travis-ci.org/soruly/search)
-[![Dependencies](https://david-dm.org/soruly/search/status.svg)](https://david-dm.org/soruly/search)
-[![license](https://img.shields.io/github/license/soruly/search.svg)](https://raw.githubusercontent.com/soruly/search/master/LICENSE)
+![GitHub](https://img.shields.io/github/license/soruly/search?style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/soruly/search/Node.js%20CI?style=flat-square)
+![David](https://img.shields.io/david/soruly/search?style=flat-square)
 
 Dead simple search engine for huge a text file (> 1 million lines), powered by elasticsearch.
 
