@@ -1,7 +1,7 @@
 # search
 
-![GitHub](https://img.shields.io/github/license/soruly/search?style=flat-square)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/soruly/search/Node.js%20CI?style=flat-square)
+[![License](https://img.shields.io/github/license/soruly/search.svg?style=flat-square)](https://github.com/soruly/search/blob/master/LICENSE)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/soruly/search/Node.js%20CI?style=flat-square)](https://github.com/soruly/search/actions)
 
 Dead simple search engine for huge a text file (> 1 million lines), powered by elasticsearch.
 
