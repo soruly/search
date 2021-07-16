@@ -1,0 +1,9 @@
+*
+!/package.json
+!/package-lock.json
+!/app.js
+!/server.js
+!/index.ejs
+!/style.css
+!/routes/
+!/node_modules/
