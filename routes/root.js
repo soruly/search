@@ -1,5 +1,7 @@
 import fetch from "node-fetch";
 
+const { ELASTICSEARCH_HOST = "127.0.0.1", ELASTICSEARCH_PORT = 9200 } = process.env;
+
 export default async function (fastify, opts) {
   fastify.get("/", async function (request, reply) {
     const from = parseInt(request.query.from, 10) || 0;
@@ -23,11 +25,14 @@ export default async function (fastify, opts) {
         }
       : { from, size };
 
-    const results = await fetch(`${process.env.ELASTICSEARCH_ENDPOINT}/files/file/_search`, {
-      method: "POST",
-      body: JSON.stringify(json),
-      headers: { "Content-Type": "application/json" },
-    }).then((response) => response.json());
+    const results = await fetch(
+      `http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}/files/file/_search`,
+      {
+        method: "POST",
+        body: JSON.stringify(json),
+        headers: { "Content-Type": "application/json" },
+      }
+    ).then((response) => response.json());
     return reply.view("index.ejs", {
       q: request.query.q,
       results: results.error

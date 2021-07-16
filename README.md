@@ -25,12 +25,7 @@ npm install
 
 ### 2. Configure settings in .env
 
-Copy .env.example and rename to .env
-
-```
-ELASTICSEARCH_PORT=9201          # you can access elasticsearch from host, for debug use
-NODE_PORT=8001                   # web interface would listen to this port
-```
+Copy .env.example and rename to .env, update the values as your need
 
 ### 3. Prepare your huge text file
 

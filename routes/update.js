@@ -1,5 +1,7 @@
 import fetch from "node-fetch";
 
+const { ELASTICSEARCH_HOST = "127.0.0.1", ELASTICSEARCH_PORT = 9200 } = process.env;
+
 export default async function (fastify, opts) {
   fastify.post("/update", async function (request, reply) {
     const startTime = Date.now();
@@ -8,13 +10,13 @@ export default async function (fastify, opts) {
       "Transfer-Encoding": "chunked",
     });
     reply.raw.write("Remove existing index...\n");
-    const resultDelete = await fetch(`${process.env.ELASTICSEARCH_ENDPOINT}/files`, {
+    const resultDelete = await fetch(`http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}/files`, {
       method: "DELETE",
     }).then((response) => response.json());
     reply.raw.write(`${JSON.stringify(resultDelete)}\n`);
 
     reply.raw.write("Creating new index...\n");
-    const result = await fetch(`${process.env.ELASTICSEARCH_ENDPOINT}/files`, {
+    const result = await fetch(`http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}/files`, {
       method: "PUT",
       body: JSON.stringify({
         settings: {
@@ -44,7 +46,7 @@ export default async function (fastify, opts) {
           command.push({ filename: fileList[start + i] });
         }
         const body = `${command.map((obj) => JSON.stringify(obj)).join("\n")}\n`;
-        await fetch(`${process.env.ELASTICSEARCH_ENDPOINT}/files/file/_bulk`, {
+        await fetch(`http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}/files/file/_bulk`, {
           method: "POST",
           body,
           headers: { "Content-Type": "application/x-ndjson" },
