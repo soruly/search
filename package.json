@@ -1,7 +1,7 @@
 {
   "name": "search",
   "version": "3.0.0",
-  "description": "",
+  "description": "Dead simple search engine for huge a text file",
   "main": "index.js",
   "type": "module",
   "scripts": {
