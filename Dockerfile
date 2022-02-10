@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM node:16.13.2-alpine
+FROM node:16.14.0-alpine
 RUN apk add --no-cache tini
 ENTRYPOINT ["/sbin/tini", "--"]
 ENV NODE_ENV=production
