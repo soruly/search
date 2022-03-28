@@ -32,7 +32,7 @@
     "fastify": "^3.27.4",
     "fastify-autoload": "^3.11.0",
     "node-fetch": "^3.2.3",
-    "point-of-view": "^5.1.0"
+    "point-of-view": "^5.2.0"
   },
   "devDependencies": {
     "jest": "^27.5.1",
