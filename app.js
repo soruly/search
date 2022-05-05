@@ -1,5 +1,5 @@
 import "dotenv/config.js";
-import AutoLoad from "fastify-autoload";
+import AutoLoad from "@fastify/autoload";
 import * as PointOfView from "point-of-view";
 import * as EJS from "ejs";
 
