@@ -10,7 +10,7 @@
     <input type="text" name="q" autofocus value="<%= q %>" />
     <input type="submit" />
   </form>
-  <small>About <%= results.hits.total %> results (<%= results.took %> miliseconds)</small>
+  <small>About <%= results.hits.total.value %> results in <%= count %> documents (<%= results.took %> miliseconds)</small>
   <br />
   <div class="nav">
     <div><a href="<%= prev %>">Prev</a></div>

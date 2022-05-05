@@ -42,11 +42,11 @@ export default async function (fastify, opts) {
         end = end > fileList.length ? fileList.length : end;
         const command = [];
         for (let i = start; i < end; i += 1) {
-          command.push({ index: { _id: start + i + 1 } });
+          command.push({ index: { _index: "files", _id: start + i + 1 } });
           command.push({ filename: fileList[start + i] });
         }
         const body = `${command.map((obj) => JSON.stringify(obj)).join("\n")}\n`;
-        await fetch(`http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}/files/file/_bulk`, {
+        await fetch(`http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}/_bulk`, {
           method: "POST",
           body,
           headers: { "Content-Type": "application/x-ndjson" },
