@@ -32,7 +32,7 @@
     "ejs": "^3.1.7",
     "fastify": "^3.29.0",
     "node-fetch": "^3.2.4",
-    "point-of-view": "^5.2.1"
+    "point-of-view": "^6.0.0"
   },
   "devDependencies": {
     "jest": "^28.1.0",
