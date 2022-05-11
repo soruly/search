@@ -11,14 +11,9 @@ export default async function (fastify, opts) {
           from,
           size,
           query: {
-            bool: {
-              must: {
-                match: {
-                  filename: {
-                    query: request.query.q,
-                    operator: "or",
-                  },
-                },
+            match: {
+              filename: {
+                query: request.query.q,
               },
             },
           },
