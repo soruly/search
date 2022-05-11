@@ -30,7 +30,7 @@
     "@fastify/autoload": "^4.0.1",
     "dotenv": "^16.0.1",
     "ejs": "^3.1.7",
-    "fastify": "^3.29.0",
+    "fastify": "^4.0.0-rc.2",
     "node-fetch": "^3.2.4",
     "point-of-view": "^6.0.0"
   },
