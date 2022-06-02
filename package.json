@@ -31,7 +31,7 @@
     "dotenv": "^16.0.1",
     "ejs": "^3.1.8",
     "fastify": "^4.0.0-rc.4",
-    "node-fetch": "^3.2.4",
+    "node-fetch": "^3.2.5",
     "point-of-view": "^6.2.1"
   },
   "devDependencies": {
