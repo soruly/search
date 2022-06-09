@@ -1,10 +1,10 @@
 import "dotenv/config.js";
 import AutoLoad from "@fastify/autoload";
-import * as PointOfView from "point-of-view";
+import * as View from "@fastify/view";
 import * as EJS from "ejs";
 
 export default async function (fastify, opts) {
-  fastify.register(PointOfView, {
+  fastify.register(View, {
     engine: {
       ejs: EJS,
     },
