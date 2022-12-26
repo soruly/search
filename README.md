@@ -1,7 +1,7 @@
 # search
 
 [![License](https://img.shields.io/github/license/soruly/search.svg?style=flat-square)](https://github.com/soruly/search/blob/master/LICENSE)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/soruly/search/Docker%20Image%20CI?style=flat-square)](https://github.com/soruly/search/actions)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/soruly/search/docker-image.yml?style=flat-square)](https://github.com/soruly/search/actions)
 [![Docker](https://img.shields.io/docker/pulls/soruly/search?style=flat-square)](https://hub.docker.com/r/soruly/search)
 [![Docker Image Size](https://img.shields.io/docker/image-size/soruly/search/latest?style=flat-square)](https://hub.docker.com/r/soruly/search)
 
