@@ -32,7 +32,7 @@
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "fastify": "^4.14.1",
-    "node-fetch": "^3.3.0"
+    "node-fetch": "^3.3.1"
   },
   "devDependencies": {
     "jest": "^29.5.0",
