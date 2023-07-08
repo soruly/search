@@ -61,7 +61,7 @@ export default async function (fastify, opts) {
     reply.raw.write(
       `Index update took ${((Date.now() - startTime) / 1000).toFixed(2)} seconds for ${
         fileList.length
-      } records\n`
+      } records\n`,
     );
     reply.raw.end();
   });

@@ -26,10 +26,10 @@ export default async function (fastify, opts) {
         method: "POST",
         body: JSON.stringify(json),
         headers: { "Content-Type": "application/json" },
-      }
+      },
     ).then((response) => response.json());
     const { count } = await fetch(
-      `http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}/files/_count`
+      `http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}/files/_count`,
     ).then((response) => response.json());
     return reply.view("index.ejs", {
       q: request.query.q,

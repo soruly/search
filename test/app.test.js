@@ -21,7 +21,7 @@ test("/", async () => {
   const html = await res.text();
   expect(html).toEqual(expect.stringContaining("results"));
   expect(html).toEqual(
-    expect.stringContaining('<input type="text" name="q" autofocus value="" />')
+    expect.stringContaining('<input type="text" name="q" autofocus value="" />'),
   );
 });
 
@@ -50,7 +50,7 @@ test("/?q=foo", async () => {
   const html = await res.text();
   expect(html).toEqual(expect.stringContaining("0 results"));
   expect(html).toEqual(
-    expect.stringContaining('<input type="text" name="q" autofocus value="foo" />')
+    expect.stringContaining('<input type="text" name="q" autofocus value="foo" />'),
   );
 });
 
@@ -67,6 +67,6 @@ test("/?q=foo&from=50", async () => {
   const html = await res.text();
   expect(html).toEqual(expect.stringContaining("0 results"));
   expect(html).toEqual(
-    expect.stringContaining('<input type="text" name="q" autofocus value="foo" />')
+    expect.stringContaining('<input type="text" name="q" autofocus value="foo" />'),
   );
 });
