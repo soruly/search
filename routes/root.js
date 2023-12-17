@@ -1,5 +1,3 @@
-import fetch from "node-fetch";
-
 const { ELASTICSEARCH_HOST = "127.0.0.1", ELASTICSEARCH_PORT = 9200 } = process.env;
 
 export default async function (fastify, opts) {

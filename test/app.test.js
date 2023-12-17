@@ -1,6 +1,4 @@
-import fs from "fs";
-import { StringDecoder } from "string_decoder";
-import fetch from "node-fetch";
+import fs from "node:fs/promises";
 import Fastify from "fastify";
 import App from "../app.js";
 
@@ -11,7 +9,7 @@ const fastify = Fastify({
 
 const PORT = 30000;
 
-beforeAll(() => fastify.register(App).listen(PORT));
+beforeAll(() => fastify.register(App).listen({ port: PORT, host: "0.0.0.0" }));
 
 afterAll(() => fastify.close());
 
@@ -25,23 +23,24 @@ test("/", async () => {
   );
 });
 
-test("/update", async (done) => {
+test("/update", async () => {
   const res = await fetch(`http://127.0.0.1:${PORT}/update`, {
     method: "POST",
     headers: { "Content-Type": "text/plain" },
-    body: fs.createReadStream("test/list.txt", "utf8"),
+    body: (await fs.open("test/list.txt")).createReadStream({ encoding: "utf8" }),
+    duplex: "half",
   });
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let result = await reader.read();
   let message = "";
-  res.body.on("data", (chunk) => {
-    const decoder = new StringDecoder("utf8");
-    message = decoder.end(chunk);
-  });
-  res.body.on("end", async () => {
-    console.log(message);
-    expect(message).toEqual(expect.stringContaining("10001 records"));
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    done();
-  });
+  while (!result.done) {
+    message += decoder.decode(result.value);
+    result = await reader.read();
+  }
+  console.log(message);
+  expect(message).toEqual(expect.stringContaining("10001 records"));
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 }, 30000);
 
 test("/?q=foo", async () => {
@@ -58,7 +57,7 @@ test("/?from=50", async () => {
   const res = await fetch(`http://127.0.0.1:${PORT}/?from=50`);
   expect(res.status).toBe(200);
   const html = await res.text();
-  expect(html).toEqual(expect.stringContaining("10001 results"));
+  expect(html).toEqual(expect.stringContaining("10001 documents"));
 });
 
 test("/?q=foo&from=50", async () => {
