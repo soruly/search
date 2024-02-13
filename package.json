@@ -31,7 +31,7 @@
     "@fastify/view": "^8.2.0",
     "dotenv": "^16.4.1",
     "ejs": "^3.1.9",
-    "fastify": "^4.26.0"
+    "fastify": "^4.26.1"
   },
   "devDependencies": {
     "jest": "^29.7.0",
