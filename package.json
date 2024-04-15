@@ -30,7 +30,7 @@
     "@fastify/autoload": "^5.8.0",
     "@fastify/view": "^9.0.0",
     "dotenv": "^16.4.5",
-    "ejs": "^3.1.9",
+    "ejs": "^3.1.10",
     "fastify": "^4.26.2"
   },
   "devDependencies": {
