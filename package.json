@@ -28,7 +28,7 @@
   "homepage": "https://github.com/soruly/search#readme",
   "dependencies": {
     "@fastify/autoload": "^5.8.0",
-    "@fastify/view": "^9.0.0",
+    "@fastify/view": "^9.1.0",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "fastify": "^4.26.2"
