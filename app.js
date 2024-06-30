@@ -1,4 +1,3 @@
-import "dotenv/config.js";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import autoLoad from "@fastify/autoload";

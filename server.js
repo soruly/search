@@ -1,6 +1,8 @@
 import Fastify from "fastify";
 import App from "./app.js";
 
+process.loadEnvFile();
+
 const fastify = Fastify({
   logger: false,
   bodyLimit: 1024 * 1024 * 1024,
