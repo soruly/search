@@ -1,23 +1,17 @@
-version: "3"
-
 services:
+
   elasticsearch:
     image: elasticsearch:8.14.1
-    restart: unless-stopped
-    environment:
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
-    networks:
-      search_net:
-
-  node:
-    image: ghcr.io/soruly/search:latest
-    restart: unless-stopped
-    environment:
-      - ELASTICSEARCH_HOST=elasticsearch
     ports:
-      - "${PORT}:3000"
-    networks:
-      search_net:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: false
+      http.cors.enabled: true
+      http.cors.allow-origin: /.*/
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
 
-networks:
-  search_net:
+volumes:
+  elasticsearch:
