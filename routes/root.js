@@ -7,10 +7,12 @@ export default async function (fastify, opts) {
       ? {
           from,
           size,
+          track_total_hits: true,
           query: {
-            match: {
+            match_phrase_prefix: {
               filename: {
                 query: request.query.q,
+                zero_terms_query: "all",
               },
             },
           },
