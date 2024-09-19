@@ -1,5 +1,4 @@
 services:
-
   elasticsearch:
     image: elasticsearch:8.14.1
     ports:

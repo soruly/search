@@ -6,7 +6,7 @@ a:hover {
   text-decoration: underline;
 }
 body {
-  font-family: Arial;
+  font-family: system-ui;
   line-height: 1.4em;
   padding: 20px;
   font-size: 12px;

@@ -1,7 +1,7 @@
 export default async function (fastify, opts) {
   const { ELASTICSEARCH_HOST = "127.0.0.1", ELASTICSEARCH_PORT = 9200 } = process.env;
-  fastify.get("/", async function (request, reply) {
-    const from = parseInt(request.query.from, 10) || 0;
+  fastify.get("/", async (request, reply) => {
+    const from = Number.parseInt(request.query.from, 10) || 0;
     const size = 50;
     const json = request.query.q
       ? {
