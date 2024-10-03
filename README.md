@@ -38,7 +38,7 @@ find . > list.txt
 ### 5. Index the file
 
 ```bash
-curl -X POST -H "Content-Type: text/plain" --data-binary @list.txt http://127.0.0.1:8001/update
+curl -X POST -H "Content-Type: text/plain" --data-binary @list.txt http://127.0.0.1:PORT/update
 ```
 
 Index update usually takes 15-30 seconds for 1 million records
