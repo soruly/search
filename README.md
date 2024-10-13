@@ -21,10 +21,10 @@ git clone https://github.com/soruly/search.git
 
 Copy .env.example to .env, update the PORT if you need to
 
-### 3. Run docker-compose
+### 3. Run docker compose
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 ### 4. Prepare your huge text file
