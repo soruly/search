@@ -19,17 +19,14 @@ export default async function (fastify, opts) {
         }
       : { from, size };
 
-    const results = await fetch(
-      `http://${ES_HOST}:${ES_PORT}/files/_search`,
-      {
-        method: "POST",
-        body: JSON.stringify(json),
-        headers: { "Content-Type": "application/json" },
-      },
-    ).then((response) => response.json());
-    const { count } = await fetch(
-      `http://${ES_HOST}:${ES_PORT}/files/_count`,
-    ).then((response) => response.json());
+    const results = await fetch(`http://${ES_HOST}:${ES_PORT}/files/_search`, {
+      method: "POST",
+      body: JSON.stringify(json),
+      headers: { "Content-Type": "application/json" },
+    }).then((response) => response.json());
+    const { count } = await fetch(`http://${ES_HOST}:${ES_PORT}/files/_count`).then((response) =>
+      response.json(),
+    );
     return reply.view("index.ejs", {
       q: request.query.q,
       count,
