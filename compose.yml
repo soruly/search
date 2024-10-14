@@ -2,7 +2,7 @@ services:
   elasticsearch:
     image: elasticsearch:8.15.2
     ports:
-      - 9202:9200
+      - ${ES_PORT}:9200
     environment:
       discovery.type: single-node
       xpack.security.enabled: false

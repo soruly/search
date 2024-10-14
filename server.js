@@ -10,7 +10,7 @@ const fastify = Fastify({
 
 fastify
   .register(App)
-  .listen({ port: process.env.PORT || 3000, host: "::" })
+  .listen({ port: process.env.WEB_PORT || 3000, host: "::" })
   .then((address) => console.log(`server listening on ${address}`))
   .catch((err) => {
     console.log("Error starting server:", err);

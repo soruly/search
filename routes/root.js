@@ -1,5 +1,5 @@
 export default async function (fastify, opts) {
-  const { ELASTICSEARCH_HOST = "127.0.0.1", ELASTICSEARCH_PORT = 9200 } = process.env;
+  const { ES_HOST = "127.0.0.1", ES_PORT = 9200 } = process.env;
   fastify.get("/", async (request, reply) => {
     const from = Number.parseInt(request.query.from, 10) || 0;
     const size = 50;
@@ -20,7 +20,7 @@ export default async function (fastify, opts) {
       : { from, size };
 
     const results = await fetch(
-      `http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}/files/_search`,
+      `http://${ES_HOST}:${ES_PORT}/files/_search`,
       {
         method: "POST",
         body: JSON.stringify(json),
@@ -28,7 +28,7 @@ export default async function (fastify, opts) {
       },
     ).then((response) => response.json());
     const { count } = await fetch(
-      `http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}/files/_count`,
+      `http://${ES_HOST}:${ES_PORT}/files/_count`,
     ).then((response) => response.json());
     return reply.view("index.ejs", {
       q: request.query.q,
