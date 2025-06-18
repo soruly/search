@@ -1,4 +1,4 @@
-export default async function (fastify, opts) {
+export default async function (fastify) {
   const { ES_HOST = "127.0.0.1", ES_PORT = 9200 } = process.env;
   fastify.get("/", async (request, reply) => {
     const from = Number.parseInt(request.query.from, 10) || 0;

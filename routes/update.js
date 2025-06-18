@@ -1,4 +1,4 @@
-export default async function (fastify, opts) {
+export default async function (fastify) {
   const { ES_HOST = "127.0.0.1", ES_PORT = 9200 } = process.env;
   fastify.post("/update", async (request, reply) => {
     const startTime = Date.now();
