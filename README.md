@@ -27,7 +27,19 @@ Copy .env.example to .env, update the PORT if you need to
 docker compose up -d
 ```
 
-### 4. Prepare your huge text file
+### 4. Start server
+
+```bash
+node server.js
+```
+
+Or with pm2
+
+```bash
+npm run start
+```
+
+### 5. Index your text file
 
 For example, generate a filename list
 
@@ -35,7 +47,7 @@ For example, generate a filename list
 find . > list.txt
 ```
 
-### 5. Index the file
+Submit to server
 
 ```bash
 curl -X POST -H "Content-Type: text/plain" --data-binary @list.txt http://127.0.0.1:PORT/update
