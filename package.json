@@ -10,7 +10,6 @@
     "restart": "pm2 restart ecosystem.config.json",
     "reload": "pm2 reload ecosystem.config.json",
     "delete": "pm2 delete ecosystem.config.json",
-    "coverage": "node --experimental-vm-modules node_modules/.bin/jest",
     "prettier": "prettier",
     "biome": "biome",
     "format": "biome check --write",
@@ -35,7 +34,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.11",
-    "jest": "^30.2.0",
     "prettier": "^3.8.0"
   }
 }
