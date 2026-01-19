@@ -37,12 +37,15 @@ export default async function (fastify) {
       while (start < fileList.length) {
         end = start + bulkSize;
         end = end > fileList.length ? fileList.length : end;
-        const command = [];
+        let body = "";
         for (let i = start; i < end; i += 1) {
-          command.push({ index: { _index: "files", _id: start + i + 1 } });
-          command.push({ filename: fileList[start + i] });
+          body += `${JSON.stringify({
+            index: { _index: "files", _id: start + i + 1 },
+          })}\n`;
+          body += `${JSON.stringify({
+            filename: fileList[start + i],
+          })}\n`;
         }
-        const body = `${command.map((obj) => JSON.stringify(obj)).join("\n")}\n`;
         await fetch(`http://${ES_HOST}:${ES_PORT}/_bulk`, {
           method: "POST",
           body,
