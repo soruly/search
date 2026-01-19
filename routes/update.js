@@ -40,10 +40,10 @@ export default async function (fastify) {
         let body = "";
         for (let i = start; i < end; i += 1) {
           body += `${JSON.stringify({
-            index: { _index: "files", _id: start + i + 1 },
+            index: { _index: "files", _id: i + 1 },
           })}\n`;
           body += `${JSON.stringify({
-            filename: fileList[start + i],
+            filename: fileList[i],
           })}\n`;
         }
         await fetch(`http://${ES_HOST}:${ES_PORT}/_bulk`, {
