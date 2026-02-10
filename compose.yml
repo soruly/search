@@ -1,6 +1,6 @@
 services:
   elasticsearch:
-    image: elasticsearch:9.2.4
+    image: elasticsearch:9.2.5
     ports:
       - ${ES_PORT}:9200
     environment:
