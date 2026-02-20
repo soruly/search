@@ -33,7 +33,7 @@
     "fastify": "^5.7.4"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.2",
+    "@biomejs/biome": "^2.4.3",
     "prettier": "^3.8.1"
   }
 }
