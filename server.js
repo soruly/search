@@ -1,4 +1,5 @@
 import Fastify from "fastify";
+
 import App from "./app.js";
 
 process.loadEnvFile();

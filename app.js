@@ -1,4 +1,5 @@
 import path from "node:path";
+
 import autoLoad from "@fastify/autoload";
 import * as View from "@fastify/view";
 import * as EJS from "ejs";
