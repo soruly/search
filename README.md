@@ -33,12 +33,6 @@ docker compose up -d
 node server.js
 ```
 
-Or with pm2
-
-```bash
-npm run start
-```
-
 ### 5. Index your text file
 
 For example, generate a filename list
